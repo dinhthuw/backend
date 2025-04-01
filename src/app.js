@@ -15,13 +15,12 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: ['https://frontend-4dmp.vercel.app', 'http://127.0.0.1:5173'],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
-    exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    maxAge: 600
+    origin: '*',  // This will allow requests from any origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true
 }));
+
 
 // Increase payload size limits to maximum
 app.use(express.json({ limit: '500mb' }));
