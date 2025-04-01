@@ -25,11 +25,14 @@ const upload = multer({ storage: storage });
 // middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['https://frontend-4dmp.vercel.app', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    credentials: true
+    origin: '*',  // Allow all origins
+    credentials: true,  // Allow cookies or authentication info to be sent with the request
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],  // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],  // Allowed headers
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],  // Headers exposed to the browser
+    maxAge: 600  // Cache preflight request for 600 seconds (10 minutes)
 }));
+
 
 // Phục vụ file tĩnh từ thư mục uploads
 app.use('/uploads', express.static('uploads'));
