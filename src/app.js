@@ -13,13 +13,15 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration
 app.use(cors({
-    origin: '*',  // This will allow requests from any origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    credentials: true
+    origin: '*',  // Allow all origins
+    credentials: true,  // Allow cookies or authentication info to be sent with the request
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],  // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],  // Allowed headers
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],  // Headers exposed to the browser
+    maxAge: 600  // Cache preflight request for 600 seconds (10 minutes)
 }));
+
 
 
 // Increase payload size limits to maximum
